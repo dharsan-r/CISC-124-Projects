@@ -3,33 +3,37 @@ import java.util.Random; // imports the random class
 import java.util.Arrays; //imports the array class
 
 /**
- * Zanzibar; code for game where players are selected from coin tosses and points are calculated using
- * dice rolls. The winner is the person who runs out of chips first. A randomized computer player is also implemented.
+ * Zanzibar; code for game where players are selected from coin tosses and
+ * points are calculated using
+ * dice rolls. The winner is the person who runs out of chips first. A
+ * randomized computer player is also implemented.
  *
  * @author Dharsan Ravindran
  * @since 2021-07-19
  * @version 1.0
- * this is just a pull
- * Student ID: 20219218
- * instructor: Professor Paul Allison
+ *          this is just a pull
+ *          Student ID: 20219218
+ *          instructor: Professor Paul Allison
  */
 public class Main {
     static Scanner in = new Scanner(System.in); // initializes a new scanner
     static Random rand = new Random(); // initializes a new random
 
     /**
-     * Uses the random object to select a random yes or no answer for the computer player.
+     * Uses the random object to select a random yes or no answer for the computer
+     * player.
      *
      * @return answer a string 'Y' or 'N' randomly from the string array
      */
-    public static String computerAnswer(){
-        String [] answer = {"Y", "N"};
+    public static String computerAnswer() {
+        String[] answer = { "Y", "N" };
         int select = rand.nextInt(answer.length);
         return answer[select];
     }
 
     /**
-     * Randomly returns either the number 1 or 2 representing heads or tails respectively
+     * Randomly returns either the number 1 or 2 representing heads or tails
+     * respectively
      *
      * @return number 1 or 2 using the random
      */
@@ -38,7 +42,8 @@ public class Main {
     }
 
     /**
-     * Randomly generates an integer array of length 3 with elements ranging from the numbers 1 through 6.
+     * Randomly generates an integer array of length 3 with elements ranging from
+     * the numbers 1 through 6.
      * To simulate a single dice roll with the 3 dice combination.
      *
      * @return dice an array with 3 integers representing a 3 dice roll
@@ -78,10 +83,12 @@ public class Main {
     }
 
     /**
-     *Finds the largest amount of points and the index of that player among an array of points.
+     * Finds the largest amount of points and the index of that player among an
+     * array of points.
      *
      * @param points the integer array that contains the points of all the players
-     * @return max an integer array with the index of the player with highest points and the highest points
+     * @return max an integer array with the index of the player with highest points
+     *         and the highest points
      */
     public static int[] mostPoints(int[] points) {
         int max = points[0];
@@ -92,15 +99,18 @@ public class Main {
                 maxIndex = i;
             }
         }
-        return new int[]{maxIndex, max};
+        return new int[] { maxIndex, max };
 
     }
 
     /**
-     *Finds the smallest amount of points and the index of that player among an array of points.
-     *
+     * Finds the smallest amount of points and the index of that player among an
+     * array of points.
+     * CHANGES TO show that computer rolls
+     * 
      * @param points the integer array that contains the points of all the players
-     * @return low an integer array with the index of the player with lowest points and the lowest points
+     * @return low an integer array with the index of the player with lowest points
+     *         and the lowest points
      */
     public static int[] lowPoints(int[] points) {
         int low = points[0];
@@ -111,23 +121,25 @@ public class Main {
                 lowIndex = i;
             }
         }
-        return new int[]{lowIndex, low};
+        return new int[] { lowIndex, low };
     }
 
     /**
-     *Checks how much chips must be given to the lowest player depending on the max players dice roll.
+     * Checks how much chips must be given to the lowest player depending on the max
+     * players dice roll.
      *
      * @param dice the integer array that contains a single 3 dice roll
-     * @return chipLoss an integer ranging from 1-4 depending on the specific dice roll
+     * @return chipLoss an integer ranging from 1-4 depending on the specific dice
+     *         roll
      */
     public static int chipLoss(int[] dice) {
         int chipLoss = 1;
-        int[] sequence = {1, 2, 3};
-        int[] zanzibar = {4, 5, 6};
+        int[] sequence = { 1, 2, 3 };
+        int[] zanzibar = { 4, 5, 6 };
         Arrays.sort(dice); // sorts the dice roll as the order of sequences do not matter
         if (Arrays.equals(dice, sequence)) {
             chipLoss = 2;
-        } else if (threeOfKind(dice)) { //calls the 3 of a kind method to see if any dice is 3 of a kind
+        } else if (threeOfKind(dice)) { // calls the 3 of a kind method to see if any dice is 3 of a kind
             chipLoss = 3;
         } else if (Arrays.equals(dice, zanzibar)) {
             chipLoss = 4;
@@ -136,13 +148,14 @@ public class Main {
     }
 
     /**
-     *Checks if a dice roll satisfies the 3 of a kind condition where all 3 dice are.
+     * Checks if a dice roll satisfies the 3 of a kind condition where all 3 dice
+     * are.
      *
      * @param dice the integer array that contains a single 3 dice roll
      * @return boolean depending on if the dice roll was a three of a kind
      */
     public static boolean threeOfKind(int[] dice) {
-        int[][] threeOfKind = {{1, 1, 1}, {2, 2, 2}, {3, 3, 3}, {4, 4, 4}, {5, 5, 5}, {6, 6, 6}};
+        int[][] threeOfKind = { { 1, 1, 1 }, { 2, 2, 2 }, { 3, 3, 3 }, { 4, 4, 4 }, { 5, 5, 5 }, { 6, 6, 6 } };
         if (Arrays.equals(dice, threeOfKind[0])) {
             return true;
         } else if (Arrays.equals(dice, threeOfKind[1])) {
@@ -159,10 +172,11 @@ public class Main {
     }
 
     /**
-     *Conducts one turn of the game calculating the total points and conducting a dice roll for a player.
+     * Conducts one turn of the game calculating the total points and conducting a
+     * dice roll for a player.
      *
      * @param playerNum the integer that contains the amount of players in a game
-     * @param x the index in which the players dice roll will be stored
+     * @param x         the index in which the players dice roll will be stored
      * @return dice roll an array that contains a dice roll of a specific player
      */
     public static int[] turn1(int playerNum, int x) {
@@ -176,18 +190,20 @@ public class Main {
     }
 
     /**
-     *Asks user how many payers will be playing and how many default chips they would like, storing both in an integer
+     * Asks user how many payers will be playing and how many default chips they
+     * would like, storing both in an integer
      * array,
      *
-     * @return playerEntry and array that contains the amount of default starting chips and the number of players
+     * @return playerEntry and array that contains the amount of default starting
+     *         chips and the number of players
      */
-    public static int[] playerEntry(){
+    public static int[] playerEntry() {
         int defaultChip = 15;
         int[] playerEntry = new int[2];
         System.out.println("Please enter the number of Players:");
         int playerNum = in.nextInt();
         in.nextLine();
-        playerEntry[0] = playerNum+1; // adds one player for the computer player
+        playerEntry[0] = playerNum + 1; // adds one player for the computer player
         System.out.println("\nWould you like to enter your own # of chips?(Enter 'Y' or 'N'):");
         String answer = in.nextLine();
 
@@ -205,32 +221,35 @@ public class Main {
     }
 
     /**
-     *Creates an array to store all of the player objects that would be playing the game.
+     * Creates an array to store all of the player objects that would be playing the
+     * game.
      *
-     * @param playerEnt the integer array that contains the amount of players in a game and teh default chips
+     * @param playerEnt the integer array that contains the amount of players in a
+     *                  game and teh default chips
      * @return players an object array which stores multiple Player objects
      */
-    public static Player[] createPlayers(int [] playerEnt){
+    public static Player[] createPlayers(int[] playerEnt) {
         Player[] players = new Player[playerEnt[0]];
         for (int i = 0; i < playerEnt[0]; i += 1) {
-            players[i] = new Player(playerEnt[1], coinToss(), i+1);
+            players[i] = new Player(playerEnt[1], coinToss(), i + 1);
         }
-        players[playerEnt[0]-1].setComputer(); // sets the last player to a computer
+        players[playerEnt[0] - 1].setComputer(); // sets the last player to a computer
         return players;
     }
 
     /**
-     *Converts the coin toss integer array to a string array for user ease of use.
+     * Converts the coin toss integer array to a string array for user ease of use.
      *
      * @param coinArray the integer that contains the coin toss values in a game
-     * @return coinNames the string array which contains if the coin toss is heads or tails.
+     * @return coinNames the string array which contains if the coin toss is heads
+     *         or tails.
      */
-    public static String[] coinNames(int[] coinArray){
+    public static String[] coinNames(int[] coinArray) {
         String[] coinNames = new String[coinArray.length];
-        for(int x = 0; x<coinArray.length; x++){
-            if(coinArray[x]==1){
+        for (int x = 0; x < coinArray.length; x++) {
+            if (coinArray[x] == 1) {
                 coinNames[x] = "Heads";
-            }else{
+            } else {
                 coinNames[x] = "Tails";
             }
         }
@@ -238,11 +257,13 @@ public class Main {
     }
 
     /**
-     *Contains the coin portion of the game which randomly flips a coin for all players to see who is first.
+     * Contains the coin portion of the game which randomly flips a coin for all
+     * players to see who is first.
      *
      * @param playerNum the integer that contains the amount of players in a game
-     * @param players the Players object array which stores all the players
-     * @return coinArray an array which contains the coin toss results for each player
+     * @param players   the Players object array which stores all the players
+     * @return coinArray an array which contains the coin toss results for each
+     *         player
      */
     public static int[] coinGame(int playerNum, Player[] players) {
         System.out.println("\nIn the coin toss will be represented in an array");
@@ -283,13 +304,14 @@ public class Main {
     }
 
     /**
-     *Goes through the coinArray to find teh only player as heads and returns the index of this player
+     * Goes through the coinArray to find teh only player as heads and returns the
+     * index of this player
      *
      * @param playerNum the integer that contains the amount of players in a game
      * @param coinArray array which stores all the coin tosses
      * @return firstPlayer the index of the player with the only heads
      */
-    public static int player1(int playerNum, int[] coinArray){
+    public static int player1(int playerNum, int[] coinArray) {
         int firstPlayer = 0;
         for (int i = 0; i < playerNum; i++) {
             if (coinArray[i] == 1) {
@@ -300,21 +322,24 @@ public class Main {
     }
 
     /**
-     *Swaps the first player found in the first player method and swaps them with current first player
+     * Swaps the first player found in the first player method and swaps them with
+     * current first player
      *
      * @param player1 the integer that contains the index of the first player
      * @param players the Players object array which stores all the players
      */
-    public static void swap(int player1, Player[] players){
-        if(players[player1].isComputer()){
-            System.out.println("Computer player won the coin toss they will go first.\n"); // if the winning player is computer
-        }else {
+    public static void swap(int player1, Player[] players) {
+        if (players[player1].isComputer()) {
+            System.out.println("Computer player won the coin toss they will go first.\n"); // if the winning player is
+                                                                                           // computer
+        } else {
             System.out.println("Player " + (player1 + 1) + " won the coin toss they will go first.\n");
         }
-        if (player1 == 0){
+        if (player1 == 0) {
             System.out.println("The order will remain since Player 1 won the coin toss.");
-        }else{
-            System.out.println("Player " + (player1+1) + " will now swap places with Player 1 and become new Player 1.");
+        } else {
+            System.out.println(
+                    "Player " + (player1 + 1) + " will now swap places with Player 1 and become new Player 1.");
             Player temp;
             temp = players[0];
             players[0] = players[player1];
@@ -323,43 +348,46 @@ public class Main {
     }
 
     /**
-     *Checks if the player would ike to conduct a re roll with the max re rolls being defined by the first player.
+     * Checks if the player would ike to conduct a re roll with the max re rolls
+     * being defined by the first player.
      * The computers answer will be randomly generated from compAnswer method
      *
      * @param diceRolls the entire dice rolls array which stores all players rolls
      * @param playerNum the integer that contains the amount of players in a game
-     * @param players the Players object array which stores all the players
-     * @param reRolls the integer which sets the max amount of re rolls
-     * @param pointArr the array of all the points of the player
-     * @param x the index of the player being asked for a re roll
-     * @return newRolls an integer which returns teh amount of re rolls conducted by a user
+     * @param players   the Players object array which stores all the players
+     * @param reRolls   the integer which sets the max amount of re rolls
+     * @param pointArr  the array of all the points of the player
+     * @param x         the index of the player being asked for a re roll
+     * @return newRolls an integer which returns teh amount of re rolls conducted by
+     *         a user
      */
-    public static int reRoll(int[][] diceRolls, int playerNum, Player[] players, int reRolls, int[] pointArr, int x){
+    public static int reRoll(int[][] diceRolls, int playerNum, Player[] players, int reRolls, int[] pointArr, int x) {
         int totalPoint;
         String reRoll;
         int newReRolls = 0;
 
         // if the amount of re rolls is 0 defined by first player only 1 rolls executes
-        if(reRolls==0){
+        if (reRolls == 0) {
             totalPoint = pointCal(diceRolls[x]);
             players[x].setDice(diceRolls[x]);
             players[x].setPoints(totalPoint);
             pointArr[x] = players[x].getPoints();
 
-        }else {
+        } else {
             for (int i = 0; i < reRolls; i++) {
                 System.out.println("Would you like to roll again? ('Y' or 'N'): ");
 
-                // If the player choosing is the computer it informs the user of the computers decision.
-                if(players[x].isComputer()){
+                // If the player choosing is the computer it informs the user of the computers
+                // decision.
+                if (players[x].isComputer()) {
                     reRoll = computerAnswer();
-                    if (reRoll.equals("Y")){
+                    if (reRoll.equals("Y")) {
                         System.out.println("The computer chose to re-roll.");
-                    }else{
+                    } else {
                         System.out.println("The computer chose not to re-roll.");
                     }
                     System.out.println();
-                }else {
+                } else {
                     reRoll = in.nextLine();
                 }
 
@@ -373,7 +401,7 @@ public class Main {
                     System.out.println();
                     newReRolls++;
                 } else {
-                    i=reRolls;
+                    i = reRolls;
                     totalPoint = pointCal(diceRolls[x]);
                     players[x].setDice(diceRolls[x]);
                     players[x].setPoints(totalPoint);
@@ -385,23 +413,24 @@ public class Main {
     }
 
     /**
-     *Contains the dice of the game which calculates points rolls dice and conducts teh randomized computer plays.
+     * Contains the dice of the game which calculates points rolls dice and conducts
+     * teh randomized computer plays.
      *
      * @param playerNum the integer that contains the amount of players in a game
-     * @param players the Players object array which stores all the players
+     * @param players   the Players object array which stores all the players
      * @return pointArr the integer array which contains all the points of a player
      */
-    public static int[] rollGame(int playerNum, Player[] players){
+    public static int[] rollGame(int playerNum, Player[] players) {
         int[] pointArr = new int[playerNum];
         int[][] diceRolls = new int[playerNum][3];
         int maxReRolls;
         // Player one sets the max re rolls for all other players
-        System.out.println("Player 1 turn:" );
+        System.out.println("Player 1 turn:");
         diceRolls[0] = turn1(playerNum, 0);
-        maxReRolls = reRoll(diceRolls, playerNum, players, 2, pointArr,0);
+        maxReRolls = reRoll(diceRolls, playerNum, players, 2, pointArr, 0);
         // every other player can only re roll a maximum of player 1s re rolls
-        for (int x = 1; x <playerNum; x++) {
-            System.out.println("\nPlayer " + (x+1) + " turn:" );
+        for (int x = 1; x < playerNum; x++) {
+            System.out.println("\nPlayer " + (x + 1) + " turn:");
             diceRolls[x] = turn1(playerNum, x);
             reRoll(diceRolls, playerNum, players, maxReRolls, pointArr, x);
         }
@@ -409,23 +438,25 @@ public class Main {
     }
 
     /**
-     *Informs user of lowest and highest point players and distributes chips accordingly.
+     * Informs user of lowest and highest point players and distributes chips
+     * accordingly.
      *
-     * @param pointArr the integer array storing all the points
+     * @param pointArr  the integer array storing all the points
      * @param playerNum the integer that contains the amount of players in a game
-     * @param players the Players object array which stores all the players
+     * @param players   the Players object array which stores all the players
      */
-    public static void pointsGame(int[] pointArr, Player[] players, int playerNum){
+    public static void pointsGame(int[] pointArr, Player[] players, int playerNum) {
         int lowPlayer = lowPoints(pointArr)[0];
         int highPlayer = mostPoints(pointArr)[0];
         int lowPoints = lowPoints(pointArr)[1];
         int highPoints = mostPoints(pointArr)[1];
-        System.out.println("\nPlayer " + (highPlayer+1) + " has the most points: " + highPoints + " points.");
-        System.out.println("Player " + (lowPlayer+1)  + " has the least points: " + lowPoints + " points.\n");
+        System.out.println("\nPlayer " + (highPlayer + 1) + " has the most points: " + highPoints + " points.");
+        System.out.println("Player " + (lowPlayer + 1) + " has the least points: " + lowPoints + " points.\n");
         int chipLoss = chipLoss(players[highPlayer].getDice());
 
-        //delete this line after tests its just test
-        System.out.println("Player " + (lowPlayer+1) + " will gain " + chipLoss + " chip(s) from each player, as they lost this round.");
+        // delete this line after tests its just test
+        System.out.println("Player " + (lowPlayer + 1) + " will gain " + chipLoss
+                + " chip(s) from each player, as they lost this round.");
 
         System.out.println("New Chip Totals: ");
 
@@ -435,22 +466,23 @@ public class Main {
             } else {
                 players[x].setChips(players[x].getChips() - chipLoss);
             }
-            System.out.println("Player " + (x+1) + ": " + players[x].getChips());
+            System.out.println("Player " + (x + 1) + ": " + players[x].getChips());
         }
         System.out.println();
     }
 
     /**
-     *Looks through the player object array to see if win conditions have been satisfied.
+     * Looks through the player object array to see if win conditions have been
+     * satisfied.
      *
      * @param playerNum the integer that contains the amount of players in a game
-     * @param players the Players object array which stores all the players
+     * @param players   the Players object array which stores all the players
      * @return boolean based on if a player has won or not
      */
-    public static boolean checkWin(int playerNum, Player[] players){
-        for(int x = 0; x<playerNum; x++){
-            if(players[x].getChips() <= 0){
-                System.out.println("\nCongratulations!!!! You win Player " + (x+1) +".");
+    public static boolean checkWin(int playerNum, Player[] players) {
+        for (int x = 0; x < playerNum; x++) {
+            if (players[x].getChips() <= 0) {
+                System.out.println("\nCongratulations!!!! You win Player " + (x + 1) + ".");
                 return true;
             }
         }
@@ -458,17 +490,19 @@ public class Main {
     }
 
     /**
-     *Asks the user if they would like to play again if t win condition has been satisfied, and if
+     * Asks the user if they would like to play again if t win condition has been
+     * satisfied, and if
      * not proceeds to the next round.
      *
      * @param playerNum the integer that contains the amount of players in a game
-     * @param players the Players object array which stores all the players
-     * @param playerEnt the array which contains default chips and the amount of players
+     * @param players   the Players object array which stores all the players
+     * @param playerEnt the array which contains default chips and the amount of
+     *                  players
      * @return playAgain string after asking player for a replay
      */
-    public static String playAgain(int playerNum, Player[] players, int[] playerEnt){
-        int i=1;
-        while (!checkWin(playerNum, players)){
+    public static String playAgain(int playerNum, Player[] players, int[] playerEnt) {
+        int i = 1;
+        while (!checkWin(playerNum, players)) {
             System.out.println("\nRound " + i + " :\n");
             int[] pointArr = rollGame(playerEnt[0], players);
             pointsGame(pointArr, players, playerEnt[0]);
@@ -481,27 +515,28 @@ public class Main {
     }
 
     /**
-     *Portion where all elements of the game is executed and the game keeps looping until a player no longer wishes for
+     * Portion where all elements of the game is executed and the game keeps looping
+     * until a player no longer wishes for
      * a replay.
      *
      */
-    public static void finalGame(){
-        int [] playerEnt = playerEntry();
+    public static void finalGame() {
+        int[] playerEnt = playerEntry();
         Player[] players = createPlayers(playerEnt);
 
         int[] coinArray = coinGame(playerEnt[0], players);
         int firstPlayer = player1(playerEnt[0], coinArray);
         swap(firstPlayer, players);
-        if (playAgain(playerEnt[0], players, playerEnt).equals("Y")){
+        if (playAgain(playerEnt[0], players, playerEnt).equals("Y")) {
             System.out.println("Starting Next Game:\n");
             finalGame();
-        }else{
+        } else {
             System.out.println("Thanks for playing!!!");
         }
     }
 
     public static void main(String[] args) {
         finalGame(); // executes the final game method
-        in.close(); //closes the scanner
+        in.close(); // closes the scanner
     }
 }
